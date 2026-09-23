@@ -1,0 +1,4 @@
+replace-chart-version-with-git: true
+generate-metadata: true
+chart-dir: ./helm/bumblebee-release-watch-proof-20260923
+destination: ./build
