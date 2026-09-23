@@ -1,0 +1,25 @@
+# Throwaway proof of the repo-manager's release watch: a job that runs on tags
+# alone and fails, so the tag pipeline of the next release is red while every
+# branch pipeline stays green. Merged into the generated workflows.yml by the
+# setup workflow in config.yml.
+version: 2.1
+jobs:
+  fail-on-tag:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Fail the tag pipeline on purpose
+          command: |
+            echo "This throwaway's tag pipeline fails on purpose: the repo-manager's release watch tells the team once."
+            exit 1
+workflows:
+  build:
+    jobs:
+      - fail-on-tag:
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/

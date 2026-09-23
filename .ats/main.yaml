@@ -1,0 +1,11 @@
+# app-test-suite (ATS >= 1.0) config, consumed by the generated
+# `run-tests-with-ats` CircleCI job (execute-chart-tests). The job creates a
+# kind cluster; ATS installs the packaged chart with `helm upgrade --install
+# --wait` and runs `pytest -m smoke` in tests/ats. The chart is template-app's
+# placeholder and deploys nothing yet, so the smoke checks the cluster alone.
+# The functional and upgrade scenarios are skipped: there is nothing to test
+# functionally, and the upgrade scenario needs a published earlier version of
+# the chart (--upgrade-tests-app-catalog-url or --upgrade-tests-app-file),
+# which a fresh repository has not got.
+app-tests-deploy-namespace: default
+skip-steps: [functional, upgrade]
